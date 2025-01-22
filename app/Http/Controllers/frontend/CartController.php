@@ -11,17 +11,18 @@ class CartController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
-        return view('frontend.pages.cart.index', compact('cart')); // Sesuaikan path view
+        return view('frontend.pages.cart.index', compact('cart'));
     }
 
     public function add(Request $request, Product $product)
     {
-        if (!auth()->check()) { return redirect()->route('login'); // Atau arahkan ke halaman login sesuai rute Anda 
-            }
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
         $cart = session()->get('cart', []);
         $productId = $product->id;
 
-        if(isset($cart[$productId])) {
+        if (isset($cart[$productId])) {
             $cart[$productId]['quantity']++;
         } else {
             $cart[$productId] = [
@@ -41,7 +42,7 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         $productId = $product->id;
 
-        if(isset($cart[$productId])) {
+        if (isset($cart[$productId])) {
             unset($cart[$productId]);
             session()->put('cart', $cart);
         }
@@ -50,14 +51,13 @@ class CartController extends Controller
     }
 
     public function update(Request $request, $productId)
-{
-    $cart = session()->get('cart', []);
-    if(isset($cart[$productId])) {
-        $cart[$productId]['quantity'] = $request->quantity;
-        session()->put('cart', $cart);
-        return redirect()->route('cart.index')->with('success', 'Kuantitas produk berhasil diperbarui!');
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] = $request->quantity;
+            session()->put('cart', $cart);
+            return redirect()->route('cart.index')->with('success', 'Kuantitas produk berhasil diperbarui!');
+        }
+        return redirect()->route('cart.index')->with('error', 'Produk tidak ditemukan di keranjang!');
     }
-    return redirect()->route('cart.index')->with('error', 'Produk tidak ditemukan di keranjang!');
-}
-
 }

@@ -24,7 +24,7 @@
 
                     <div class="d-flex justify-content-center align-items-center mb-3">
                         <div class="rating-wrapper mx-auto">
-                            <div class="rating">
+                            <div class="rating d-flex"></div>
                                 @for ($i = 0; $i < 5; $i++)
                                     <ion-icon name="star{{ $i < $product->rating ? '' : '-outline' }}"></ion-icon>
                                 @endfor

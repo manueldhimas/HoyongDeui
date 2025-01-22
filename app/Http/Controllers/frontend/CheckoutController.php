@@ -4,7 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Pesanan; // Pastikan menggunakan model Pesanan
+use App\Models\Pesanan;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller

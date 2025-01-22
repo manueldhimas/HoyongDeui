@@ -10,10 +10,15 @@ class CreatePesananTable extends Migration
     {
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
+            $table->string('name');
+            $table->string('address');
+            $table->string('city');
+            $table->string('postal_code');
+            $table->string('phone');
+            $table->string('email');
             $table->string('nama_pesanan');
-            $table->decimal('total_harga', 10, 2);
-            $table->enum('status', ['Selesai', 'Tunggu', 'Tolak']);
+            $table->decimal('total_price', 10, 2);
+            $table->enum('status', ['Completed', 'Pending', 'Rejected']);
             $table->timestamps();
         });
     }
@@ -22,5 +27,5 @@ class CreatePesananTable extends Migration
     {
         Schema::dropIfExists('pesanan');
     }
-};
+}
 

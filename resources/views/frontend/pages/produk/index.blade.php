@@ -14,7 +14,7 @@
                         <div class="product-card">
                             <figure class="card-banner">
                                 <a href="{{ route('produk.show', $product->id) }}">
-                                    <img src="{{ url('image/' . $product->photo) }}" width="370" height="270" loading="lazy" alt="{{ $product->name }}" class="img-cover">
+                                    <img src="{{ url('image/' . $product->photo) }}" loading="lazy" alt="{{ $product->name }}" class="img-cover">
                                 </a>
                             </figure>
                             <div class="card-content">
@@ -47,8 +47,6 @@
     </section>
 @endsection
 
-
-
 <style>
 .container {
     max-width: 1200px;
@@ -63,7 +61,7 @@
 }
 
 .product-column {
-    width: calc(25% - 1rem);
+    width: calc(33.33% - 1rem); /* Adjusted to make the cards larger */
     box-sizing: border-box;
 }
 
@@ -79,9 +77,20 @@
     transform: scale(1.05);
 }
 
-.card-banner img {
+.card-banner {
+    position: relative;
     width: 100%;
-    height: auto;
+    padding-top: 100%; /* 1:1 Aspect Ratio */
+    overflow: hidden;
+}
+
+.card-banner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .card-content {
@@ -116,8 +125,13 @@
     margin-bottom: 1rem;
 }
 
+.rating {
+    display: flex;
+}
+
 .rating ion-icon {
     color: #ffdd00;
+    margin-right: 0.1rem;
 }
 
 .rating-text {
