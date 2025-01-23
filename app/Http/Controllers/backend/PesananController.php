@@ -39,6 +39,7 @@ class PesananController extends Controller
 
     public function show(Pesanan $pesanan)
     {
+        $pesanan = Pesanan::with('products')->findOrFail($pesanan->id);
         return view('backend.pages.pesanan.show', compact('pesanan'));
     }
 

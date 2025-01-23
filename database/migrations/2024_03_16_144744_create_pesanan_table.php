@@ -16,7 +16,6 @@ class CreatePesananTable extends Migration
             $table->string('postal_code');
             $table->string('phone');
             $table->string('email');
-            $table->string('nama_pesanan');
             $table->decimal('total_price', 10, 2);
             $table->enum('status', ['Completed', 'Pending', 'Rejected']);
             $table->timestamps();

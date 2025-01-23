@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,12 +8,23 @@ class Pesanan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tanggal', 'nama_pesanan', 'total_harga', 'status', 'user_id', 'product_id'];
-    protected $table = 'pesanan'; // Nama tabel kustom
+    protected $fillable = [
+        'name',
+        'address',
+        'city',
+        'postal_code',
+        'phone',
+        'email',
+        'total_price',
+        'status',
+    ];
 
-    public function product()
+    protected $table = 'pesanan';
+
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class, 'pesanan_products')  // Menghubungkan ke tabel pivot
+                    ->withPivot('quantity', 'price'); // Menyimpan informasi tambahan di tabel pivot
     }
 
     public function user()

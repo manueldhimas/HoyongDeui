@@ -22,26 +22,6 @@ class RoleSeeder extends Seeder
                 'guard_name'    => 'web'
             ],
             [
-                'name'          => 'Guru',
-                'guard_name'    => 'web'
-            ],
-            [
-                'name'          => 'Staf',
-                'guard_name'    => 'web'
-            ],
-            [
-                'name'          => 'Murid',
-                'guard_name'    => 'web'
-            ],
-            [
-                'name'          => 'Orang Tua',
-                'guard_name'    => 'web'
-            ],
-            [
-                'name'          => 'Kepala Sekolah',
-                'guard_name'    => 'web'
-            ],
-            [
                 'name'          => 'Guest',
                 'guard_name'    => 'web'
             ],

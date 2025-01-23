@@ -78,32 +78,32 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'status' => 'required|in:Aktif,Nonaktif',
             'sku' => 'required|string|max:255|unique:products,sku,' . $product->id,
-            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk foto
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk foto
         ]);
 
+        // Penanganan foto baru
         if ($request->hasFile('photo')) {
-            // Hapus foto lama jika ada
-            if ($product->photo) {
-                Storage::disk('public')->delete($product->photo);
+            // Hapus foto lama jika ada dan bukan placeholder default
+            if ($product->photo && $product->photo !== 'nophoto.jpg') {
+                @unlink(public_path('image/' . $product->photo));
             }
 
-            $photo = $request->file('photo');
-            $path = $photo->store('products', 'public');
-
-            // Debugging
-            if (!Storage::disk('public')->exists($path)) {
-                return back()->with('error', 'Foto tidak tersimpan di storage. Path: ' . $path);
-            }
-
-            $product->photo = $path; // Perbarui path foto
+            // Simpan foto baru
+            $fileName = 'photo-' . uniqid() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('image'), $fileName);
+        } else {
+            // Gunakan foto lama jika tidak ada foto baru
+            $fileName = $product->photo;
         }
 
+        // Update data produk
         $product->update([
             'name' => $request->name,
             'stock' => $request->stock,
             'price' => $request->price,
             'status' => $request->status,
             'sku' => $request->sku,
+            'photo' => $fileName,
         ]);
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui');
@@ -112,13 +112,15 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // Hapus foto dari penyimpanan jika ada
-        if ($product->photo) {
-            Storage::disk('public')->delete($product->photo);
+        // Hapus foto dari penyimpanan jika ada dan bukan placeholder default
+        if ($product->photo && $product->photo !== 'nophoto.jpg') {
+            @unlink(public_path('image/' . $product->photo));
         }
 
+        // Hapus produk dari database
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus');
     }
+
 }

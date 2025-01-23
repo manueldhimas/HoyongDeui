@@ -23,6 +23,7 @@ class CreatePenggunaTable extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('postal_code')->nullable();
+            $table->string('nama_pesanan');
             $table->rememberToken();
             $table->timestamps();
         });
