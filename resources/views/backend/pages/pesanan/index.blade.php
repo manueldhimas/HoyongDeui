@@ -24,34 +24,17 @@
                         <div class="card-header-action">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#all" role="tab">All</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="selesai-tab" data-bs-toggle="tab" href="#selesai" role="tab">Selesai</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tunggu-tab" data-bs-toggle="tab" href="#tunggu" role="tab">Tunggu</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tolak-tab" data-bs-toggle="tab" href="#tolak" role="tab">Tolak</a>
-                                </li>
+                                    <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#order"
+                                        role="tab">Order</a>
                             </ul>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="all" role="tabpanel">
-                                @include('backend.pages.pesanan.tab_content', ['pesanans' => $allPesanan])
+                            <div class="tab-pane fade show active" id="order" role="tabpanel">
+                                @include('backend.pages.pesanan.tab_content', ['pesanan' => $pesanan]) <!-- Kirimkan seluruh data -->
                             </div>
-                            <div class="tab-pane fade" id="selesai" role="tabpanel">
-                                @include('backend.pages.pesanan.tab_content', ['pesanans' => $selesaiPesanan])
-                            </div>
-                            <div class="tab-pane fade" id="tunggu" role="tabpanel">
-                                @include('backend.pages.pesanan.tab_content', ['pesanans' => $tungguPesanan])
-                            </div>
-                            <div class="tab-pane fade" id="tolak" role="tabpanel">
-                                @include('backend.pages.pesanan.tab_content', ['pesanans' => $tolakPesanan])
-                            </div>
+
                         </div>
                     </div>
                 </div>

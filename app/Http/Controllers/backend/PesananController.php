@@ -10,12 +10,8 @@ class PesananController extends Controller
 {
     public function index()
     {
-        $allPesanan = Pesanan::all();
-        $selesaiPesanan = Pesanan::where('status', 'Selesai')->get();
-        $tungguPesanan = Pesanan::where('status', 'Tunggu')->get();
-        $tolakPesanan = Pesanan::where('status', 'Tolak')->get();
-
-        return view('backend.pages.pesanan.index', compact('allPesanan', 'selesaiPesanan', 'tungguPesanan', 'tolakPesanan'));
+        $pesanan = Pesanan::all();
+        return view('backend.pages.pesanan.index', compact('pesanan'));
     }
 
     public function create()
@@ -26,10 +22,14 @@ class PesananController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tanggal' => 'required|date',
-            'nama_pesanan' => 'required|string|max:255',
-            'total_harga' => 'required|numeric|min:0',
-            'status' => 'required|in:Selesai,Tunggu,Tolak',
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'postal_code' => 'required|string|max:10',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+            'total_price' => 'required|numeric|min:0',
+            'status' => 'required|in:Completed,Pending,Rejected',
         ]);
 
         Pesanan::create($request->all());
@@ -51,10 +51,14 @@ class PesananController extends Controller
     public function update(Request $request, Pesanan $pesanan)
     {
         $request->validate([
-            'tanggal' => 'required|date',
-            'nama_pesanan' => 'required|string|max:255',
-            'total_harga' => 'required|numeric|min:0',
-            'status' => 'required|in:Selesai,Tunggu,Tolak',
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'postal_code' => 'required|string|max:10',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+            'total_price' => 'required|numeric|min:0',
+            'status' => 'required|in:Completed,Pending,Rejected',
         ]);
 
         $pesanan->update($request->all());

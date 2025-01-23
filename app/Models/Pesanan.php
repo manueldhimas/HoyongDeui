@@ -15,6 +15,7 @@ class Pesanan extends Model
         'postal_code',
         'phone',
         'email',
+        'pesanan_products',
         'total_price',
         'status',
     ];

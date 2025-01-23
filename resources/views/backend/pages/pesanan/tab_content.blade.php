@@ -10,16 +10,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($pesanans as $pesanan)
-        <tr>
-            <td>{{ $pesanan->tanggal }}</td>
-            <td>{{ $pesanan->nama_pesanan }}</td>
-            <td>{{ $pesanan->total_harga }}</td>
-            <td>{{ $pesanan->status }}</td>
-            <td>
-                <a href="{{ route('pesanan.show', $pesanan->id) }}" class="btn btn-info btn-sm">Detail</a>
-            </td>
-        </tr>
+        @foreach ($pesanan as $pesananItem)
+            <tr>
+                <td>{{ $pesananItem->created_at ? $pesananItem->created_at->format('d-m-Y') : '-' }}</td>
+                <td>{{ $pesananItem->name }}</td>
+                <td>{{ $pesananItem->total_price }}</td>
+                <td>{{ $pesananItem->status }}</td>
+                <td>
+                    <a href="{{ route('pesanan.show', $pesananItem->id) }}" class="btn btn-info btn-sm">Detail</a>
+                </td>
+            </tr>
         @endforeach
     </tbody>
 </table>
